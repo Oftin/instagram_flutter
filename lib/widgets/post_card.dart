@@ -98,7 +98,11 @@ class _PostCardState extends State<PostCard> {
                           ]
                               .map(
                                 (e) => InkWell(
-                                  onTap: () {},
+                                  onTap: () async {
+                                    FirestoreMethods()
+                                        .deletePost(widget.snap['postId']);
+                                    Navigator.of(context).pop();
+                                  },
                                   child: Container(
                                     padding: const EdgeInsets.symmetric(
                                       vertical: 12,
@@ -259,7 +263,7 @@ class _PostCardState extends State<PostCard> {
                   child: Container(
                     padding: const EdgeInsets.symmetric(vertical: 4),
                     child: Text(
-                      'View all ${commentLen} comments',
+                      'View all $commentLen comments',
                       style:
                           const TextStyle(fontSize: 16, color: secondaryColor),
                     ),

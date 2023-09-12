@@ -8,7 +8,6 @@ import 'package:uuid/uuid.dart';
 class FirestoreMethods {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-  // upload post
   Future<String> uploadPost(
     String description,
     Uint8List file,
@@ -86,6 +85,14 @@ class FirestoreMethods {
       } else {
         print('Text is empty');
       }
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
+  Future<void> deletePost(String postId) async {
+    try {
+      await _firestore.collection('posts').doc(postId).delete();
     } catch (e) {
       print(e.toString());
     }
